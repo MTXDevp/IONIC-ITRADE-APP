@@ -1,0 +1,36 @@
+.titulo {
+    padding-top: 5%;
+    color:#5e6160;
+    text-align: center;
+}
+.contenedor{
+
+}
+.subtitulo {
+    margin-top: 10%;
+    text-align: center;
+    color: #949997;
+}
+.fondo {
+    text-align: center;
+}
+.botones {
+    text-align: center;
+    padding: 10%;
+}
+#btnRegis {
+    width: 75%;
+    --background: #0b5fa5;
+    --background-activated: #518bbb;
+    --color: #ffffff;
+    --color-activated: #ffffff81;
+    --opacity: 1;
+}
+#btnInic {
+    width: 75%;
+    --background: #ffffff;
+    --background-activated: ##ffffff;
+    --color: #518bbb;
+    --color-activated: #518bbb;
+    --opacity: 1;
+}

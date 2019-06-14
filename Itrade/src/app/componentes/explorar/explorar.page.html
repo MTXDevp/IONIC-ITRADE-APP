@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-searchbar color="light" type="tel" animated>
+    </ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-toolbar>
+    <ion-text>
+      <h4 id="titulo">Explorar <i class="far fa-compass"></i></h4>
+    </ion-text>
+  </ion-toolbar>
+  <ion-list>
+      <ion-item *ngFor="let empresa of listaEmpresas" (click)="masInfo(empresa.nombre)">
+        <ion-label>
+          {{empresa.nombre}}
+        </ion-label>
+      </ion-item>
+  </ion-list>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar class="btn-wrapper">
+    <div (click)="irInicio()">
+      <i id="icon-wrapper" class="fas fa-home fa-2x"></i><span id="txt">Inicio</span>
+    </div>
+  </ion-toolbar>
+</ion-footer>

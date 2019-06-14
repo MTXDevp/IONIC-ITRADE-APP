@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-button slot="end" fill="clear" (click)="presentActionSheet()">
+      <ion-icon style="color: #fff;" name="menu"></ion-icon>
+    </ion-button>
+    <ion-title id="cabecera">ITrade</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-toolbar>
+    <ion-text>
+      <h4 style="color: dimgray">Mis Favoritos <i class="far fa-edit" (click)="modificarLista(!editar)"></i></h4>
+    </ion-text>
+  </ion-toolbar>
+  <ion-list>
+    <ion-reorder-group (ionItemReorder)="onRenderItems($event)" [disabled]="editar">
+
+      <ion-item *ngFor="let item of listItems" (click)="masInfo(item)">
+        <ion-label>
+          {{item}}
+        </ion-label>
+        <ion-reorder slot="end"></ion-reorder>
+      </ion-item>
+
+    </ion-reorder-group>
+  </ion-list>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar class="btn-wrapper">
+    <div (click)="irExplorar()">
+      <i id="icon-wrapper" class="fab fa-wpexplorer fa-2x"></i><span id="txt">Explorar</span>
+    </div>
+  </ion-toolbar>
+</ion-footer>
