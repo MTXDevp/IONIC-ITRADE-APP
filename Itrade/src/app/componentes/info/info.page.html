@@ -13,7 +13,7 @@
 <ion-content padding>
   <div id="izquierda">
     <ion-label>Rango de predicción</ion-label>
-    <ion-select value="12" okText="Aceptar" cancelText="Cancelar">
+    <ion-select value="12" okText="Aceptar" cancelText="Cancelar" [(ngModel)]="meses" (ionChange)="predecir = false">
       <ion-select-option value="12">12 Meses</ion-select-option>
       <ion-select-option value="9">9 Meses</ion-select-option>
       <ion-select-option value="6">6 Meses</ion-select-option>
@@ -34,7 +34,7 @@
   </div>
 
   <div class="btnPredecir">
-    <ion-button color="primary">Predecir</ion-button>
+    <ion-button color="primary" (click)="nuevaPrediccion()" [disabled]="predecir">Predecir</ion-button>
   </div>
 </ion-content>
 

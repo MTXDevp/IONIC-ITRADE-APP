@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Querys } from '../../servicios/fav.service';
 import { Location } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-info',
@@ -13,11 +14,23 @@ export class InfoPage implements OnInit {
   public nombreEmpresa: any;
   public favorito: boolean;
   public listItems: string[];
+  public meses: string;
+  public predecir: boolean;
 
-  constructor(private route: ActivatedRoute, public router: Router, public fav: Querys, private location: Location) {
+  constructor(private route: ActivatedRoute,
+    public router: Router,
+    public fav: Querys,
+    private location: Location,
+    private http: HttpClient) {
   }
 
   ngOnInit() {
+    this.predecir = true;
+    this.isFavorito();
+    this.cargarPrediccion();
+  }
+
+  isFavorito() {
     this.route.params.subscribe(params => {
       this.nombreEmpresa = params['item'];
       this.fav.listFavs().then(data => {
@@ -34,12 +47,30 @@ export class InfoPage implements OnInit {
     });
   }
 
+  cargarPrediccion() {
+    console.log(this.nombreEmpresa);
+    return new Promise(resolve => {
+      this.http.get('https://jsonplaceholder.typicode.com/users').subscribe(data => {
+        resolve(data);
+        console.log(data);
+      }, err => {
+        console.log(err);
+      });
+    });
+  }
+
   anteriorPagina() {
     this.location.back();
   }
 
   irInicio() {
     this.router.navigate(['/home']);
+  }
+
+  nuevaPrediccion(){
+    console.log(this.meses);
+    console.log(this.nombreEmpresa);
+    this.predecir = true;
   }
 
   modificarFavorito(estado: boolean) {
