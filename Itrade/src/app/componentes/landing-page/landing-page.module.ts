@@ -23,4 +23,4 @@ const routes: Routes = [
   ],
   declarations: [LandingPagePage]
 })
-export class LandingPagePageModule {}
+export class LandingPagePageModule { }

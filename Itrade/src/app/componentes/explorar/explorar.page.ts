@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { EmpresasService } from './../../servicios/empresas.service';
 import { NavController } from '@ionic/angular';
 import { FormControl } from '@angular/forms'
-import {debounceTime} from 'rxjs/operators';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-explorar',
@@ -12,33 +12,28 @@ import {debounceTime} from 'rxjs/operators';
 })
 export class ExplorarPage implements OnInit {
 
-  public searchTerm : string = '';
+  public searchTerm: string = '';
   public searchControl: FormControl;
   public items: any;
   public searching: any = false;
 
   constructor(public router: Router, private navCtrl: NavController, private empresasService: EmpresasService) {
     this.searchControl = new FormControl();
-   }
+  }
 
-  ngOnInit() { 
-   this.setFilteredItems();
-   this.searchControl.valueChanges.pipe(debounceTime(250)).subscribe(search  => {
-     this.searching = false;
+  ngOnInit() {
     this.setFilteredItems();
-   })
+    this.searchControl.valueChanges.pipe(debounceTime(250)).subscribe(search => {
+      this.searching = false;
+      this.setFilteredItems();
+    })
   }
 
-  ionViewDidLoad(){
-    
-  }
-
-  onSearchInput(){
-    console.log('cambio el boolean')
+  onSearchInput() {
     this.searching = true;
   }
 
-  setFilteredItems(){
+  setFilteredItems() {
     this.items = this.empresasService.filterItems(this.searchTerm);
   }
 

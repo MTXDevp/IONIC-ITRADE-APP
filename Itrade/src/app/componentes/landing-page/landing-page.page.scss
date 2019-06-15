@@ -1,11 +1,12 @@
 .titulo {
     padding-top: 5%;
-    color:#5e6160;
     text-align: center;
 }
-.contenedor{
 
+.titulo h1{
+    color:#294353;
 }
+
 .subtitulo {
     margin-top: 10%;
     text-align: center;
@@ -22,7 +23,7 @@
     width: 75%;
     --background: #0b5fa5;
     --background-activated: #518bbb;
-    --color: #ffffff;
+    color: #ffffff;
     --color-activated: #ffffff81;
     --opacity: 1;
 }
@@ -30,7 +31,7 @@
     width: 75%;
     --background: #ffffff;
     --background-activated: ##ffffff;
-    --color: #518bbb;
+    color: #0b5fa5;
     --color-activated: #518bbb;
     --opacity: 1;
 }

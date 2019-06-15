@@ -19,7 +19,7 @@ export class LoginPage implements OnInit {
     ],
     'password': [
       { type: 'required', message: 'Campo obligatorio.' },
-      { type: 'minlength', message: 'La contraseña debe tener minimo 5 caracteres.' }
+      { type: 'minlength', message: 'La contraseña debe tener mínimo 5 caracteres.' }
     ]
   };
 
@@ -43,7 +43,7 @@ export class LoginPage implements OnInit {
       this.errorMessage = '';
       this.router.navigate(['/home']);
     }).catch(err => {
-      this.errorMessage = err.message;
+      this.errorMessage = 'No se encuentra el usuario';
     });
   }
 }

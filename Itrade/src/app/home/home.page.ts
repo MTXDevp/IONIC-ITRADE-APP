@@ -1,20 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthService } from '../servicios/auth.service';
 import { ModalController } from '@ionic/angular';
 import { ActionSheetController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { Querys } from '../servicios/fav.service';
-import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage implements OnInit {
+export class HomePage {
 
   public editar = true;
   public listItems: string[];
+  public msg = null;
 
   constructor(
     public actionSheetController: ActionSheetController,
@@ -24,12 +24,18 @@ export class HomePage implements OnInit {
     public fav: Querys
   ) { }
 
-  ngOnInit() {
+  ionViewWillEnter() {
     this.fav.listFavs().then(data => {
       this.listItems = data;
+      if (this.listItems.length === 0) {
+        this.msg = "No se encuentra ningún 'favorito'."
+      }
+      else {
+        this.msg = null;
+      }
     }
     ).catch(err => {
-      console.log('Error al listar');
+      this.msg = "No se encuentra ningún 'favorito'."
     });
   }
 

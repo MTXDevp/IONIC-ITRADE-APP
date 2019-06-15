@@ -4,19 +4,15 @@
     margin-right: 10px;
 }
 #back{
-    color: #000;
-    text-shadow: 0 0 3px #000;
+    color: #6bad8c;
+    text-shadow: 0 0 3px #252525;
     margin-left: 10px;
-}
-#imagen{
-    width: 90%;
-    height: 50%;
-    margin-left: 5%;
 }
 
 .btn-wrapper {
     text-align: center;
 }
+
 #icon-wrapper{
     display: block;
 }
@@ -27,6 +23,50 @@
 }
 
 .btnPredecir{
+    margin-top: 10%;
     width: 100%;
     text-align: center;
+    font-size: 20px
+}
+
+.btnPredecir ion-button{
+    width: 30%;
+}
+
+#izquierda{
+    margin-top: 5%;
+    margin-left: 15%;
+    margin-right: 15%;
+    width: 70%;
+    color: #707070;
+    text-align: center;
+    font-size: 18px;
+}
+
+#centro{
+    margin-top: 5%;
+    margin-left: 5%;
+    margin-right: 5%;
+    width: 90%;
+}
+
+#derecha{
+    width: 80%;
+    color: #707070
+}
+#derecha div{
+    width: 100%;
+    margin-top: 5%;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.fondoCabecera{
+    background: #7dc9aa;
+}
+
+#titulo{
+    text-align: center;
+    font-size: 25px;
+    color: #294353;
 }

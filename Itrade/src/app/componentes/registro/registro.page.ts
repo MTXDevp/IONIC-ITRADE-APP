@@ -20,11 +20,11 @@ export class RegistroPage implements OnInit {
     ],
     'password': [
       { type: 'required', message: 'Campo obligatorio.' },
-      { type: 'minlength', message: 'La contraseña debe tener minimo 5 caracteres.' }
+      { type: 'minlength', message: 'La contraseña debe tener mínimo 5 caracteres.' }
     ]
   };
 
-  constructor(private auth: AuthService, private router: Router, private formBuilder: FormBuilder) {}
+  constructor(private auth: AuthService, private router: Router, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     this.validations_form = this.formBuilder.group({

@@ -1,13 +1,10 @@
 <ion-header>
-  <ion-toolbar color="primary">
+  <ion-toolbar color="success">
     <ion-searchbar [(ngModel)]="searchTerm" [formControl]="searchControl" (ionInput)="onSearchInput()" color="light"
       type="tel" animated></ion-searchbar>
   </ion-toolbar>
 </ion-header>
-<!--
-  [(ngModel)]="searchTerm"  [formControl]="searchControl" (ionInput)="onSearchInput()"
-  color="light" type="tel" animated
--->
+
 <ion-content padding>
   <ion-toolbar>
     <ion-text>

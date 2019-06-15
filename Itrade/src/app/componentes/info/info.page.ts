@@ -10,7 +10,7 @@ import { Location } from '@angular/common';
 })
 export class InfoPage implements OnInit {
 
-  public parametro: any;
+  public nombreEmpresa: any;
   public favorito: boolean;
   public listItems: string[];
 
@@ -19,10 +19,10 @@ export class InfoPage implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.parametro = params['item'];
+      this.nombreEmpresa = params['item'];
       this.fav.listFavs().then(data => {
         this.listItems = data;
-        const index = this.listItems.indexOf(this.parametro);
+        const index = this.listItems.indexOf(this.nombreEmpresa);
         if (index !== -1) {
           this.favorito = true;
           document.getElementById('fav').style.color = 'red';
@@ -34,7 +34,7 @@ export class InfoPage implements OnInit {
     });
   }
 
-  anteriorPagina(){
+  anteriorPagina() {
     this.location.back();
   }
 
@@ -48,7 +48,7 @@ export class InfoPage implements OnInit {
       document.getElementById('fav').style.color = 'red';
       this.fav.listFavs().then(data => {
         this.listItems = data;
-        this.listItems.push(this.parametro);
+        this.listItems.push(this.nombreEmpresa);
         this.fav.addFavs(this.listItems);
       }
       ).catch(err => {
@@ -59,7 +59,7 @@ export class InfoPage implements OnInit {
       document.getElementById('fav').style.textShadow = '0 0 3px #000';
       this.fav.listFavs().then(data => {
         this.listItems = data;
-        const index = this.listItems.indexOf(this.parametro);
+        const index = this.listItems.indexOf(this.nombreEmpresa);
         if (index > -1) {
           this.listItems.splice(index, 1);
         }
