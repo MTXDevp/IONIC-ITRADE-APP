@@ -23,10 +23,8 @@ export class InfoPage implements OnInit {
       this.fav.listFavs().then(data => {
         this.listItems = data;
         const index = this.listItems.indexOf(this.parametro);
-        console.log(index)
         if (index !== -1) {
           this.favorito = true;
-          console.log(this.favorito)
           document.getElementById('fav').style.color = 'red';
         }
       }

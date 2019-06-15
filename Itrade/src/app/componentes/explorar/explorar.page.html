@@ -1,22 +1,28 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-searchbar color="light" type="tel" animated>
-    </ion-searchbar>
+    <ion-searchbar [(ngModel)]="searchTerm" [formControl]="searchControl" (ionInput)="onSearchInput()" color="light"
+      type="tel" animated></ion-searchbar>
   </ion-toolbar>
 </ion-header>
-
+<!--
+  [(ngModel)]="searchTerm"  [formControl]="searchControl" (ionInput)="onSearchInput()"
+  color="light" type="tel" animated
+-->
 <ion-content padding>
   <ion-toolbar>
     <ion-text>
-      <h4 id="titulo">Explorar <i class="far fa-compass"></i></h4>
+      <h4 id="titulo">Listado de Empresas<i class="far fa-compass"></i></h4>
     </ion-text>
   </ion-toolbar>
+  <div *ngIf="searching" class="spinner-container">
+    <ion-spinner></ion-spinner>
+  </div>
   <ion-list>
-      <ion-item *ngFor="let empresa of listaEmpresas" (click)="masInfo(empresa.nombre)">
-        <ion-label>
-          {{empresa.nombre}}
-        </ion-label>
-      </ion-item>
+    <ion-item *ngFor="let item of items" (click)="masInfo(item.title)">
+      <ion-label>
+        {{item.title}}
+      </ion-label>
+    </ion-item>
   </ion-list>
 </ion-content>
 
