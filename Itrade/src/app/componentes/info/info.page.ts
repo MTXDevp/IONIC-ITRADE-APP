@@ -17,6 +17,7 @@ export class InfoPage implements OnInit {
   public listItems: string[];
   public meses = '1';
   public predecir: boolean;
+  public descripcion: string;
 
   constructor(private route: ActivatedRoute,
     public router: Router,
@@ -30,6 +31,7 @@ export class InfoPage implements OnInit {
     this.predecir = true;
     this.isFavorito();
     this.cargarPrediccion();
+    this.cargarDescripcion();
   }
 
   isFavorito() {
@@ -50,12 +52,22 @@ export class InfoPage implements OnInit {
   }
 
   cargarPrediccion() {
-    console.log(this.nombreEmpresa);
     return new Promise(resolve => {
-      this.http.get('http://127.0.0.1:8000/api/Predictions/'+this.empresaService.formateoEmpresa(this.nombreEmpresa) + this.meses).subscribe(data => {
+      this.http.get('http://127.0.0.1:8000/api/Predictions/' + this.empresaService.formateoEmpresa(this.nombreEmpresa) + this.meses + '.png').subscribe(data => {
         resolve(data);
       }, err => {
-        document.getElementById('imagen').setAttribute( 'src', err.url);
+        document.getElementById('imagen').setAttribute('src', err.url);
+      });
+    });
+  }
+
+  cargarDescripcion() {
+    return new Promise(resolve => {
+      this.http.get('http://127.0.0.1:8000/api/Predictions/' + this.empresaService.formateoEmpresa(this.nombreEmpresa) + this.meses + '.txt').subscribe(data => {
+        resolve(data);
+        this.descripcion = data.message;
+      }, err => {
+        console.log(err)
       });
     });
   }
@@ -68,7 +80,7 @@ export class InfoPage implements OnInit {
     this.router.navigate(['/home']);
   }
 
-  nuevaPrediccion(){
+  nuevaPrediccion() {
     this.cargarPrediccion();
     this.predecir = true;
   }
