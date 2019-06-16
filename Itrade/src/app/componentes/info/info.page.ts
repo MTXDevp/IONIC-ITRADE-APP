@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Querys } from '../../servicios/fav.service';
 import { Location } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
+import { EmpresasService } from '../../servicios/empresas.service'
 
 @Component({
   selector: 'app-info',
@@ -14,14 +15,15 @@ export class InfoPage implements OnInit {
   public nombreEmpresa: any;
   public favorito: boolean;
   public listItems: string[];
-  public meses: string;
+  public meses = '1';
   public predecir: boolean;
 
   constructor(private route: ActivatedRoute,
     public router: Router,
     public fav: Querys,
     private location: Location,
-    private http: HttpClient) {
+    private http: HttpClient,
+    private empresaService: EmpresasService) {
   }
 
   ngOnInit() {
@@ -50,11 +52,10 @@ export class InfoPage implements OnInit {
   cargarPrediccion() {
     console.log(this.nombreEmpresa);
     return new Promise(resolve => {
-      this.http.get('https://jsonplaceholder.typicode.com/users').subscribe(data => {
+      this.http.get('http://127.0.0.1:8000/api/Predictions/'+this.empresaService.formateoEmpresa(this.nombreEmpresa) + this.meses).subscribe(data => {
         resolve(data);
-        console.log(data);
       }, err => {
-        console.log(err);
+        document.getElementById('imagen').setAttribute( 'src', err.url);
       });
     });
   }
@@ -68,8 +69,7 @@ export class InfoPage implements OnInit {
   }
 
   nuevaPrediccion(){
-    console.log(this.meses);
-    console.log(this.nombreEmpresa);
+    this.cargarPrediccion();
     this.predecir = true;
   }
 
