@@ -3,7 +3,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Querys } from '../../servicios/fav.service';
 import { Location } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { EmpresasService } from '../../servicios/empresas.service'
 
 @Component({
   selector: 'app-info',
@@ -16,22 +15,33 @@ export class InfoPage implements OnInit {
   public favorito: boolean;
   public listItems: string[];
   public meses = '1';
-  public predecir: boolean;
+  public predecir = true;
   public descripcion: string;
+  public estado = true;
 
   constructor(private route: ActivatedRoute,
     public router: Router,
     public fav: Querys,
     private location: Location,
-    private http: HttpClient,
-    private empresaService: EmpresasService) {
+    private http: HttpClient) {
   }
 
   ngOnInit() {
-    this.predecir = true;
     this.isFavorito();
-    this.cargarPrediccion();
-    this.cargarDescripcion();
+    this.mostrarPrediccion();
+    
+    //this.cargarDescripcion();
+  }
+
+  async mostrarPrediccion(){
+    return await new Promise(resolve => {
+      this.http.get('http://127.0.0.1:8000/api/Predictions/' + this.nombreEmpresa + '-' + this.meses).subscribe(data => {
+        resolve(data);
+      }, err => {
+        this.cargarPrediccion();
+        console.log('se ha realizado la predicción.')
+      });
+    });
   }
 
   isFavorito() {
@@ -51,23 +61,28 @@ export class InfoPage implements OnInit {
     });
   }
 
-  cargarPrediccion() {
-    return new Promise(resolve => {
-      this.http.get('http://127.0.0.1:8000/api/Predictions/' + this.empresaService.formateoEmpresa(this.nombreEmpresa) + this.meses + '.png').subscribe(data => {
+  async cargarPrediccion() {
+    return await new Promise(resolve => {
+      this.http.get('http://127.0.0.1:8000/api/Predictions/' + this.nombreEmpresa + '-' + this.meses + '.png').subscribe(data => {
         resolve(data);
       }, err => {
         document.getElementById('imagen').setAttribute('src', err.url);
+        console.log('imagen')
+        console.log(err);
+        this.cargarDescripcion();
       });
     });
   }
 
-  cargarDescripcion() {
-    return new Promise(resolve => {
-      this.http.get('http://127.0.0.1:8000/api/Predictions/' + this.empresaService.formateoEmpresa(this.nombreEmpresa) + this.meses + '.txt').subscribe(data => {
+  async cargarDescripcion() {
+    return await new Promise(resolve => {
+      this.http.get('http://127.0.0.1:8000/api/Predictions/' + this.nombreEmpresa + '-' + this.meses + '.txt').subscribe(data => {
         resolve(data);
-        this.descripcion = data.message;
       }, err => {
-        console.log(err)
+        console.log('descripcion');
+        console.log(err);
+        //this.descripcion = data.message;
+        //this.estado = true;
       });
     });
   }

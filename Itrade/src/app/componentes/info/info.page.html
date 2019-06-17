@@ -11,30 +11,37 @@
 </ion-header>
 
 <ion-content padding>
-  <div id="izquierda">
-    <ion-label>Rango de predicción</ion-label>
-    <ion-select value="12" okText="Aceptar" cancelText="Cancelar" [(ngModel)]="meses" (ionChange)="predecir = false">
-      <ion-select-option value="12">12 Meses</ion-select-option>
-      <ion-select-option value="9">9 Meses</ion-select-option>
-      <ion-select-option value="6">6 Meses</ion-select-option>
-      <ion-select-option value="3">3 Meses</ion-select-option>
-      <ion-select-option value="1">1 Meses</ion-select-option>
-    </ion-select>
+
+  <div id="carga" [hidden]="estado">
+    <h1>Cargando...</h1>
   </div>
 
-  <div id="centro">
-    <img id="imagen">
-  </div>
-
-  <div id="derecha">
-    <h3>Descripción:</h3>
-    <div>
-      <h6>{{descripcion}}</h6>
+  <div>
+    <div id="izquierda">
+      <ion-label>Rango de predicción</ion-label>
+      <ion-select value="12" okText="Aceptar" cancelText="Cancelar" [(ngModel)]="meses" (ionChange)="predecir = false">
+        <ion-select-option value="12">12 Meses</ion-select-option>
+        <ion-select-option value="9">9 Meses</ion-select-option>
+        <ion-select-option value="6">6 Meses</ion-select-option>
+        <ion-select-option value="3">3 Meses</ion-select-option>
+        <ion-select-option value="1">1 Meses</ion-select-option>
+      </ion-select>
     </div>
-  </div>
 
-  <div class="btnPredecir">
-    <ion-button color="primary" (click)="nuevaPrediccion()" [disabled]="predecir">Predecir</ion-button>
+    <div id="centro">
+      <img id="imagen">
+    </div>
+
+    <div id="derecha">
+      <h3>Descripción:</h3>
+      <div>
+        <h6>{{descripcion}}</h6>
+      </div>
+    </div>
+
+    <div class="btnPredecir">
+      <ion-button color="primary" (click)="nuevaPrediccion()" [disabled]="predecir">Predecir</ion-button>
+    </div>
   </div>
 </ion-content>
 
