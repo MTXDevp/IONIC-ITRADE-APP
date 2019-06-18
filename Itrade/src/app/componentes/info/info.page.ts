@@ -17,7 +17,7 @@ export class InfoPage implements OnInit {
   public meses = '1';
   public predecir = true;
   public descripcion: string;
-  public estado = true;
+  public estado = false;
 
   constructor(private route: ActivatedRoute,
     public router: Router,
@@ -29,8 +29,6 @@ export class InfoPage implements OnInit {
   ngOnInit() {
     this.isFavorito();
     this.mostrarPrediccion();
-    
-    //this.cargarDescripcion();
   }
 
   async mostrarPrediccion(){
@@ -68,7 +66,6 @@ export class InfoPage implements OnInit {
       }, err => {
         document.getElementById('imagen').setAttribute('src', err.url);
         console.log('imagen')
-        console.log(err);
         this.cargarDescripcion();
       });
     });
@@ -78,11 +75,11 @@ export class InfoPage implements OnInit {
     return await new Promise(resolve => {
       this.http.get('http://127.0.0.1:8000/api/Predictions/' + this.nombreEmpresa + '-' + this.meses + '.txt').subscribe(data => {
         resolve(data);
-      }, err => {
         console.log('descripcion');
-        console.log(err);
-        //this.descripcion = data.message;
-        //this.estado = true;
+        this.descripcion = data.message;
+        this.estado = true;
+      }, err => {
+        console.log(err)
       });
     });
   }
@@ -96,7 +93,7 @@ export class InfoPage implements OnInit {
   }
 
   nuevaPrediccion() {
-    this.cargarPrediccion();
+    this.mostrarPrediccion();
     this.predecir = true;
   }
 
