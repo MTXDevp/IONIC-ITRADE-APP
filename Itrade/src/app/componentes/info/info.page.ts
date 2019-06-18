@@ -94,6 +94,7 @@ export class InfoPage implements OnInit {
 
   nuevaPrediccion() {
     this.mostrarPrediccion();
+    this.estado = false;
     this.predecir = true;
   }
 
